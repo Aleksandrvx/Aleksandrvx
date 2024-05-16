@@ -1,22 +1,18 @@
 import java.util.Scanner;
 
-public class ObliczCiezar {
+public class KalkulatorCzasu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Podaj masę obiektu w kilogramach: ");
-        double masa = scanner.nextDouble();
-        double ciezar = obliczCiezar(masa);
+        System.out.print("Podaj liczbę sekund: ");
+        int sekundy = scanner.nextInt();
 
-        if (ciezar > 1000) {
-            System.out.println("Obiekt jest zbyt ciężki.");
-        } else if (ciezar < 10) {
-            System.out.println("Obiekt jest za lekki.");
-        } else {
-            System.out.println("Ciężar obiektu wynosi: " + ciezar + " niutonów.");
-        }
-    }
+        int dni = sekundy / 86400;
+        sekundy %= 86400;
+        int godziny = sekundy / 3600;
+        sekundy %= 3600;
+        int minuty = sekundy / 60;
+        sekundy %= 60;
 
-    public static double obliczCiezar(double masa) {
-        return masa * 9.8;
+        System.out.println(sekundy + " sekund to " + dni + " dni, " + godziny + " godzin, " + minuty + " minut i " + sekundy + " sekund.");
     }
 }
