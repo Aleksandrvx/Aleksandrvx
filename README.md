@@ -1,21 +1,25 @@
-import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        String name = "Twoje Imię"; // Zamień "Twoje Imię" na swoje rzeczywiste imię
+        for (int i = 0; i < 10; i++) {
+            System.out.println(name);
+        }
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
-
-        while (true) {
-            System.out.print("Wpisz tekst 'Tak' lub 'Nie': ");
-            userInput = scanner.nextLine();
-            if (userInput.equalsIgnoreCase("Tak") || userInput.equalsIgnoreCase("Nie")) {
-                System.out.println("Dziękuję! Podałeś poprawny tekst.");
-                break;
-            } else {
-                System.out.println("Niepoprawny tekst. Spróbuj ponownie.");
-            }
+        for (int i = 1; i < 50; i += 2) {
+            System.out.println(i);
         }
+    }
+}
 
-        scanner.close();
+
+public class Main {
+    public static void main(String[] args) {
+        for (int i = 0; i <= 100; i += 5) {
+            System.out.println(i);
+        }
     }
 }
