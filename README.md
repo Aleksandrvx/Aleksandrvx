@@ -1,62 +1,72 @@
-import java.util.Random;
 import java.util.Scanner;
 
-public class Zad16 {
-
-    public static int wyborKomputera() {
-        Random random = new Random();
-        return random.nextInt(3) + 1; // 1 - kamień, 2 - papier, 3 - nożyce
-    }
-
-    public static int wyborUzytkownika() {
-        Scanner scanner = new Scanner(System.in);
-        int wybor;
-
-        do {
-            System.out.println("Wybierz opcję:");
-            System.out.println("1 - Kamień");
-            System.out.println("2 - Papier");
-            System.out.println("3 - Nożyce");
-            System.out.print("Twój wybór: ");
-            wybor = scanner.nextInt();
-
-            if (wybor < 1 || wybor > 3) {
-                System.out.println("Nieprawidłowy wybór! Wybierz 1, 2 lub 3.");
-            }
-        } while (wybor < 1 || wybor > 3);
-
-        return wybor;
-    }
-
-    public static void pokazWybor(int wybor, String kto) {
-        String nazwa = switch (wybor) {
-            case 1 -> "Kamień";
-            case 2 -> "Papier";
-            case 3 -> "Nożyce";
-            default -> "Nieznany";
-        };
-        System.out.println(kto + " wybrał: " + nazwa);
-    }
-
-    public static void okreslZwyciezce(int wyborUzytkownika, int wyborKomputera) {
-        if (wyborUzytkownika == wyborKomputera) {
-            System.out.println("Remis! Zagraj ponownie.");
-        } else if ((wyborUzytkownika == 1 && wyborKomputera == 3) ||
-                   (wyborUzytkownika == 2 && wyborKomputera == 1) ||
-                   (wyborUzytkownika == 3 && wyborKomputera == 2)) {
-            System.out.println("Gratulacje! Wygrałeś!");
-        } else {
-            System.out.println("Przegrałeś! Komputer wygrywa.");
-        }
-    }
+public class GraKamienPapierNozyce {
 
     public static void main(String[] args) {
-        int wyborKomputera = wyborKomputera();
-        int wyborUzytkownika = wyborUzytkownika();
+        Scanner scanner = new Scanner(System.in);
 
-        pokazWybor(wyborUzytkownika, "Ty");
-        pokazWybor(wyborKomputera, "Komputer");
+        System.out.println("Witaj w grze 'Kamień, Papier, Nożyce'!");
 
-        okreslZwyciezce(wyborUzytkownika, wyborKomputera);
+        int graczWybor;
+
+        while (true) {
+            System.out.println("\nWybierz: ");
+            System.out.println("1. Kamień");
+            System.out.println("2. Papier");
+            System.out.println("3. Nożyce");
+            System.out.println("4. Wyjście");
+
+            System.out.print("Podaj swój wybór (1-3) lub 4 aby zakończyć: ");
+            graczWybor = scanner.nextInt();
+
+            if (graczWybor == 4) {
+                System.out.println("Dziękujemy za grę!");
+                break;
+            }
+
+            if (graczWybor < 1 || graczWybor > 3) {
+                System.out.println("Niepoprawny wybór! Wybierz liczbę od 1 do 3.");
+                continue;
+            }
+
+            int komputerWybor = (graczWybor % 3) + 1;
+
+            String graczWybory = "";
+            String komputerWybory = "";
+
+            switch (graczWybor) {
+                case 1:
+                    graczWybory = "Kamień";
+                    break;
+                case 2:
+                    graczWybory = "Papier";
+                    break;
+                case 3:
+                    graczWybory = "Nożyce";
+                    break;
+            }
+
+            switch (komputerWybor) {
+                case 1:
+                    komputerWybory = "Kamień";
+                    break;
+                case 2:
+                    komputerWybory = "Papier";
+                    break;
+                case 3:
+                    komputerWybory = "Nożyce";
+                    break;
+            }
+
+            System.out.println("Komputer wybrał: " + komputerWybory);
+
+            if (graczWybor == komputerWybor) {
+                System.out.println("Remis! Obaj wybraliście " + graczWybory);
+            } else if ((graczWybor == 1 && komputerWybor == 3) || (graczWybor == 2 && komputerWybor == 1) || (graczWybor == 3 && komputerWybor == 2)) {
+                System.out.println("Wygrałeś! " + graczWybory + " wygrywa z " + komputerWybory);
+            } else {
+                System.out.println("Przegrałeś! " + komputerWybory + " wygrywa z " + graczWybory);
+            }
+        }
     }
 }
