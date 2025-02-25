@@ -1,38 +1,6 @@
-import java.util.Scanner;
+public class Zad13 {
 
-public class Zad11 {
-
-    public static double kineticEnergy(double masa, double predkosc) {
-        return 0.5 * masa * predkosc * predkosc;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Podaj masę obiektu w kilogramach: ");
-        double masa = scanner.nextDouble();
-
-        System.out.print("Podaj prędkość obiektu w metrach na sekundę: ");
-        double predkosc = scanner.nextDouble();
-
-        double energia = kineticEnergy(masa, predkosc);
-
-        System.out.println("Energia kinetyczna obiektu wynosi: " + energia + " J");
-
-        scanner.close();
-    }
-}
-
-
-
-
-
-
-import java.util.Scanner;
-
-public class Zad12 {
-
-    public static boolean isPrime(int liczba) {
+    public static boolean czyPierwsza(int liczba) {
         if (liczba <= 1) {
             return false;
         }
@@ -45,17 +13,42 @@ public class Zad12 {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        for (int liczba = 1; liczba <= 10000; liczba++) {
+            if (czyPierwsza(liczba)) {
+                System.out.println(liczba);
+            }
+        }
+    }
+}
 
-        System.out.print("Podaj liczbę do sprawdzenia, czy jest pierwsza: ");
-        int liczba = scanner.nextInt();
 
-        if (isPrime(liczba)) {
-            System.out.println(liczba + " jest liczbą pierwszą.");
-        } else {
-            System.out.println(liczba + " nie jest liczbą pierwszą.");
+
+
+
+import java.util.Random;
+
+public class Zad14 {
+
+    public static boolean isEven(int liczba) {
+        return liczba % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int parzyste = 0;
+        int nieparzyste = 0;
+
+        for (int i = 0; i < 100; i++) {
+            int liczba = random.nextInt(1000); // Losowa liczba od 0 do 999
+
+            if (isEven(liczba)) {
+                parzyste++;
+            } else {
+                nieparzyste++;
+            }
         }
 
-        scanner.close();
+        System.out.println("Liczba parzystych: " + parzyste);
+        System.out.println("Liczba nieparzystych: " + nieparzyste);
     }
 }
