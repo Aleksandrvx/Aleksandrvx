@@ -1,28 +1,62 @@
+import java.util.Random;
 import java.util.Scanner;
 
-public class Zad15 {
+public class Zad16 {
 
-    public static double presentValue(double przyszlaWartosc, double stopaOprocentowania, int liczbaLat) {
-        return przyszlaWartosc / Math.pow(1 + stopaOprocentowania, liczbaLat);
+    public static int wyborKomputera() {
+        Random random = new Random();
+        return random.nextInt(3) + 1; // 1 - kamień, 2 - papier, 3 - nożyce
+    }
+
+    public static int wyborUzytkownika() {
+        Scanner scanner = new Scanner(System.in);
+        int wybor;
+
+        do {
+            System.out.println("Wybierz opcję:");
+            System.out.println("1 - Kamień");
+            System.out.println("2 - Papier");
+            System.out.println("3 - Nożyce");
+            System.out.print("Twój wybór: ");
+            wybor = scanner.nextInt();
+
+            if (wybor < 1 || wybor > 3) {
+                System.out.println("Nieprawidłowy wybór! Wybierz 1, 2 lub 3.");
+            }
+        } while (wybor < 1 || wybor > 3);
+
+        return wybor;
+    }
+
+    public static void pokazWybor(int wybor, String kto) {
+        String nazwa = switch (wybor) {
+            case 1 -> "Kamień";
+            case 2 -> "Papier";
+            case 3 -> "Nożyce";
+            default -> "Nieznany";
+        };
+        System.out.println(kto + " wybrał: " + nazwa);
+    }
+
+    public static void okreslZwyciezce(int wyborUzytkownika, int wyborKomputera) {
+        if (wyborUzytkownika == wyborKomputera) {
+            System.out.println("Remis! Zagraj ponownie.");
+        } else if ((wyborUzytkownika == 1 && wyborKomputera == 3) ||
+                   (wyborUzytkownika == 2 && wyborKomputera == 1) ||
+                   (wyborUzytkownika == 3 && wyborKomputera == 2)) {
+            System.out.println("Gratulacje! Wygrałeś!");
+        } else {
+            System.out.println("Przegrałeś! Komputer wygrywa.");
+        }
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        int wyborKomputera = wyborKomputera();
+        int wyborUzytkownika = wyborUzytkownika();
 
-        System.out.print("Podaj przyszłą wartość (np. 10000): ");
-        double przyszlaWartosc = scanner.nextDouble();
+        pokazWybor(wyborUzytkownika, "Ty");
+        pokazWybor(wyborKomputera, "Komputer");
 
-        System.out.print("Podaj roczną stopę oprocentowania (np. 0.05 dla 5%): ");
-        double stopaOprocentowania = scanner.nextDouble();
-
-        System.out.print("Podaj liczbę lat: ");
-        int liczbaLat = scanner.nextInt();
-
-        double wartoscBiezaca = presentValue(przyszlaWartosc, stopaOprocentowania, liczbaLat);
-
-        System.out.printf("Aby uzyskać %.2f zł po %d latach przy oprocentowaniu %.2f%%, musisz wpłacić teraz %.2f zł.\n",
-                przyszlaWartosc, liczbaLat, stopaOprocentowania * 100, wartoscBiezaca);
-
-        scanner.close();
+        okreslZwyciezce(wyborUzytkownika, wyborKomputera);
     }
 }
