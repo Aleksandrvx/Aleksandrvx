@@ -1,88 +1,72 @@
-import java.util.Scanner;
+public class Zad4 {
+    private static final double G = 9.8;
 
-public class Zad2 {
-    public static double obliczCeneDetaliczna(double cenaHurtowa, double marzaProcentowa) {
-        return cenaHurtowa + (cenaHurtowa * (marzaProcentowa / 100));
+    public static double fallingDistance(int czas) {
+        return 0.5 * G * czas * czas;
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Czas (s) | Odległość (m)");
+        System.out.println("------------------------");
+        for (int t = 1; t <= 10; t++) {
+            System.out.printf("%8d | %12.2f%n", t, fallingDistance(t));
+        }
+    }
+}
 
-        System.out.print("Podaj cenę hurtową produktu (w zł): ");
-        double cenaHurtowa = scanner.nextDouble();
 
-        System.out.print("Podaj marżę w procentach: ");
-        double marzaProcentowa = scanner.nextDouble();
 
-        double cenaDetaliczna = obliczCeneDetaliczna(cenaHurtowa, marzaProcentowa);
+public class Zad5 {
+    public static double celsius(int fahrenheit) {
+        return (5.0 / 9.0) * (fahrenheit - 32);
+    }
 
-        System.out.printf("Cena detaliczna produktu wynosi: %.2f zł%n", cenaDetaliczna);
+    public static void main(String[] args) {
 
-        scanner.close();
+        System.out.println("Fahrenheit | Celsius");
+        System.out.println("---------------------");
+
+        for (int f = 0; f <= 20; f++) {
+            System.out.printf("%10d | %7.2f%n", f, celsius(f));
+        }
     }
 }
 
 
 
 
-
 import java.util.Scanner;
 
-public class Zad3 {
-    private static final double LITRY_NA_10M2 = 1.5;
-    private static final double GODZINY_NA_10M2 = 8;
-    private static final double KOSZT_GODZINY = 18.0;
-
-    public static double obliczLiczbeLitrow(double powierzchnia) {
-        return (powierzchnia / 10) * LITRY_NA_10M2;
+public class Zad6 {
+    public static double calcAverage(int t1, int t2, int t3, int t4, int t5) {
+        return (t1 + t2 + t3 + t4 + t5) / 5.0;
     }
 
-    public static double obliczLiczbeGodzin(double powierzchnia) {
-        return (powierzchnia / 10) * GODZINY_NA_10M2;
-    }
-
-    public static double obliczKosztFarby(double liczbaLitrow, double cenaZaLitr) {
-        return liczbaLitrow * cenaZaLitr;
-    }
-
-    public static double obliczKosztRobocizny(double liczbaGodzin) {
-        return liczbaGodzin * KOSZT_GODZINY;
-    }
-
-    public static double obliczLacznyKoszt(double kosztFarby, double kosztRobocizny) {
-        return kosztFarby + kosztRobocizny;
+    public static int determineGrade(int wynik) {
+        if (wynik >= 90) return 5;
+        else if (wynik >= 80) return 4;
+        else if (wynik >= 70) return 3;
+        else if (wynik >= 60) return 2;
+        else return 1;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int[] wyniki = new int[5];
 
-        System.out.print("Podaj liczbę pokojów do pomalowania: ");
-        int liczbaPokojow = scanner.nextInt();
-
-        System.out.print("Podaj cenę farby za litr (w zł): ");
-        double cenaFarbyZaLitr = scanner.nextDouble();
-
-        double calkowitaPowierzchnia = 0;
-
-        for (int i = 1; i <= liczbaPokojow; i++) {
-            System.out.print("Podaj powierzchnię pokoju nr " + i + " (w m²): ");
-            calkowitaPowierzchnia += scanner.nextDouble();
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Podaj wynik testu " + (i + 1) + ": ");
+            wyniki[i] = scanner.nextInt();
         }
 
-        double potrzebneLitry = obliczLiczbeLitrow(calkowitaPowierzchnia);
-        double potrzebneGodziny = obliczLiczbeGodzin(calkowitaPowierzchnia);
-        double kosztFarby = obliczKosztFarby(potrzebneLitry, cenaFarbyZaLitr);
-        double kosztRobocizny = obliczKosztRobocizny(potrzebneGodziny);
-        double lacznyKoszt = obliczLacznyKoszt(kosztFarby, kosztRobocizny);
+        System.out.println("\nWyniki testów i ich oceny:");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Test " + (i + 1) + ": " + wyniki[i] + " - Ocena: " + determineGrade(wyniki[i]));
+        }
 
-
-        System.out.println("\n=== Podsumowanie kosztów malowania ===");
-        System.out.printf("Łączna powierzchnia: %.2f m²%n", calkowitaPowierzchnia);
-        System.out.printf("Potrzebna ilość farby: %.2f litrów%n", potrzebneLitry);
-        System.out.printf("Potrzebny czas pracy: %.2f godzin%n", potrzebneGodziny);
-        System.out.printf("Koszt farby: %.2f zł%n", kosztFarby);
-        System.out.printf("Koszt robocizny: %.2f zł%n", kosztRobocizny);
-        System.out.printf("Łączny koszt malowania: %.2f zł%n", lacznyKoszt);
+        double srednia = calcAverage(wyniki[0], wyniki[1], wyniki[2], wyniki[3], wyniki[4]);
+        System.out.printf("\nŚrednia z testów: %.2f\n", srednia);
+        System.out.println("Ocena końcowa: " + determineGrade((int) srednia));
 
         scanner.close();
     }
