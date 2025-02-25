@@ -1,72 +1,86 @@
-public class Zad4 {
-    private static final double G = 9.8;
-
-    public static double fallingDistance(int czas) {
-        return 0.5 * G * czas * czas;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Czas (s) | Odległość (m)");
-        System.out.println("------------------------");
-        for (int t = 1; t <= 10; t++) {
-            System.out.printf("%8d | %12.2f%n", t, fallingDistance(t));
-        }
-    }
-}
-
-
-
-public class Zad5 {
-    public static double celsius(int fahrenheit) {
-        return (5.0 / 9.0) * (fahrenheit - 32);
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println("Fahrenheit | Celsius");
-        System.out.println("---------------------");
-
-        for (int f = 0; f <= 20; f++) {
-            System.out.printf("%10d | %7.2f%n", f, celsius(f));
-        }
-    }
-}
-
-
-
-
 import java.util.Scanner;
 
-public class Zad6 {
-    public static double calcAverage(int t1, int t2, int t3, int t4, int t5) {
-        return (t1 + t2 + t3 + t4 + t5) / 5.0;
+public class Zad7 {
+    public static void menu() {
+        System.out.println("\n1. Przelicz na kilometry.");
+        System.out.println("2. Przelicz na cale.");
+        System.out.println("3. Przelicz na stopy.");
+        System.out.println("4. Zamknij program.");
+        System.out.print("Podaj wybraną opcję: ");
     }
 
-    public static int determineGrade(int wynik) {
-        if (wynik >= 90) return 5;
-        else if (wynik >= 80) return 4;
-        else if (wynik >= 70) return 3;
-        else if (wynik >= 60) return 2;
-        else return 1;
+    public static void showKilometers(double metry) {
+        System.out.printf("%.2f metrów w kilometrach to %.3f km.\n", metry, metry * 0.001);
+    }
+
+    public static void showInches(double metry) {
+        System.out.printf("%.2f metrów w calach to %.2f cali.\n", metry, metry * 39.37);
+    }
+
+    public static void showFeet(double metry) {
+        System.out.printf("%.2f metrów w stopach to %.2f ft.\n", metry, metry * 3.281);
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int[] wyniki = new int[5];
+        double metry;
+        
+        do {
+            System.out.print("Podaj odległość w metrach (wartość nieujemna): ");
+            metry = scanner.nextDouble();
+            if (metry < 0) {
+                System.out.println("Błąd! Odległość nie może być ujemna.");
+            }
+        } while (metry < 0);
 
-        for (int i = 0; i < 5; i++) {
-            System.out.print("Podaj wynik testu " + (i + 1) + ": ");
-            wyniki[i] = scanner.nextInt();
-        }
+        int opcja;
+        do {
+            menu();
+            opcja = scanner.nextInt();
+            
+            switch (opcja) {
+                case 1:
+                    showKilometers(metry);
+                    break;
+                case 2:
+                    showInches(metry);
+                    break;
+                case 3:
+                    showFeet(metry);
+                    break;
+                case 4:
+                    System.out.println("Żegnaj!");
+                    break;
+                default:
+                    System.out.println("Błąd! Wybierz opcję 1-4.");
+            }
+        } while (opcja != 4);
 
-        System.out.println("\nWyniki testów i ich oceny:");
-        for (int i = 0; i < 5; i++) {
-            System.out.println("Test " + (i + 1) + ": " + wyniki[i] + " - Ocena: " + determineGrade(wyniki[i]));
-        }
+        scanner.close();
+    }
+}
 
-        double srednia = calcAverage(wyniki[0], wyniki[1], wyniki[2], wyniki[3], wyniki[4]);
-        System.out.printf("\nŚrednia z testów: %.2f\n", srednia);
-        System.out.println("Ocena końcowa: " + determineGrade((int) srednia));
+
+import java.util.Scanner;
+
+public class Zad8 {
+
+    public static double distance(double szybkosc, double czas) {
+        return szybkosc * czas;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Podaj szybkość pojazdu (w km/h): ");
+        double szybkosc = scanner.nextDouble();
+
+        System.out.print("Podaj czas podróży (w godzinach): ");
+        double czas = scanner.nextDouble();
+
+        double odleglosc = distance(szybkosc, czas);
+
+        System.out.println("Przejechana odległość to: " + odleglosc + " km.");
 
         scanner.close();
     }
