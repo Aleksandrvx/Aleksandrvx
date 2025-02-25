@@ -1,9 +1,11 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class GraKamienPapierNozyce {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
         System.out.println("Witaj w grze 'Kamień, Papier, Nożyce'!");
 
@@ -29,7 +31,8 @@ public class GraKamienPapierNozyce {
                 continue;
             }
 
-            int komputerWybor = (graczWybor % 3) + 1;
+            // Komputer losuje wybór
+            int komputerWybor = random.nextInt(3) + 1; // Losuje liczbę 1, 2 lub 3
 
             String graczWybory = "";
             String komputerWybory = "";
@@ -63,10 +66,4 @@ public class GraKamienPapierNozyce {
             if (graczWybor == komputerWybor) {
                 System.out.println("Remis! Obaj wybraliście " + graczWybory);
             } else if ((graczWybor == 1 && komputerWybor == 3) || (graczWybor == 2 && komputerWybor == 1) || (graczWybor == 3 && komputerWybor == 2)) {
-                System.out.println("Wygrałeś! " + graczWybory + " wygrywa z " + komputerWybory);
-            } else {
-                System.out.println("Przegrałeś! " + komputerWybory + " wygrywa z " + graczWybory);
-            }
-        }
-    }
-}
+                System.out.println("Wygrałeś! " + graczWybory + " wygrywa
