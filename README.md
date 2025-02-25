@@ -1,54 +1,28 @@
-public class Zad13 {
+import java.util.Scanner;
 
-    public static boolean czyPierwsza(int liczba) {
-        if (liczba <= 1) {
-            return false;
-        }
-        for (int i = 2; i <= Math.sqrt(liczba); i++) {
-            if (liczba % i == 0) {
-                return false;
-            }
-        }
-        return true;
+public class Zad15 {
+
+    public static double presentValue(double przyszlaWartosc, double stopaOprocentowania, int liczbaLat) {
+        return przyszlaWartosc / Math.pow(1 + stopaOprocentowania, liczbaLat);
     }
 
     public static void main(String[] args) {
-        for (int liczba = 1; liczba <= 10000; liczba++) {
-            if (czyPierwsza(liczba)) {
-                System.out.println(liczba);
-            }
-        }
-    }
-}
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Podaj przyszłą wartość (np. 10000): ");
+        double przyszlaWartosc = scanner.nextDouble();
 
+        System.out.print("Podaj roczną stopę oprocentowania (np. 0.05 dla 5%): ");
+        double stopaOprocentowania = scanner.nextDouble();
 
+        System.out.print("Podaj liczbę lat: ");
+        int liczbaLat = scanner.nextInt();
 
+        double wartoscBiezaca = presentValue(przyszlaWartosc, stopaOprocentowania, liczbaLat);
 
-import java.util.Random;
+        System.out.printf("Aby uzyskać %.2f zł po %d latach przy oprocentowaniu %.2f%%, musisz wpłacić teraz %.2f zł.\n",
+                przyszlaWartosc, liczbaLat, stopaOprocentowania * 100, wartoscBiezaca);
 
-public class Zad14 {
-
-    public static boolean isEven(int liczba) {
-        return liczba % 2 == 0;
-    }
-
-    public static void main(String[] args) {
-        Random random = new Random();
-        int parzyste = 0;
-        int nieparzyste = 0;
-
-        for (int i = 0; i < 100; i++) {
-            int liczba = random.nextInt(1000); // Losowa liczba od 0 do 999
-
-            if (isEven(liczba)) {
-                parzyste++;
-            } else {
-                nieparzyste++;
-            }
-        }
-
-        System.out.println("Liczba parzystych: " + parzyste);
-        System.out.println("Liczba nieparzystych: " + nieparzyste);
+        scanner.close();
     }
 }
